@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Screen Restaurant Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .slideshow {
+            position: relative;
+            width: 100%;
+            height: calc(100% - 5rem);
+            overflow: hidden;
+        }
+        .slideshow img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
+            transition: opacity .5s ease-in-out;
+            padding: 2px;
+            margin-top: 2px;
+        }
+
+        .slideshow {
+            position: relative;
+            width: 100%;
+            height: calc(100% - 5rem);
+            overflow: hidden;
+        }
+
+        .slideshow img, .slideshow video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensures content fits while maintaining aspect ratio */
+            position: absolute;
+            transition: opacity 0.5s ease-in-out;
+            padding: 2px;
+            margin-top: 2px;
+        }
+
+        
+
+        #side-info {
+            height: 60vh;
+            overflow-y: scroll;
+            padding: 10px;
+            -ms-overflow-style: none;  /* For Internet Explorer 10+ */
+            scrollbar-width: none;  /* For Firefox */   
+            padding-bottom: 10px;
+        }
+    
+        
+    </style>
+</head>
+<body class="bg-gray-100 overflow-hidden">
+    <!-- Full Screen Container -->
+    <div class="w-screen h-screen flex">
+        <!-- Left Section -->
+        <div class="w-[30%] bg-red-700 text-white flex flex-col items-center">
+            <!-- Logo Section -->
+            <div class="p-6 border-b border-red-500 text-center">
+                <div class="rounded-full bg-white p-4 inline-block">
+                    <img src="./logo.png" class="w-[100%] h-auto" alt="Restaurant Logo">
+                </div>
+                <!-- <p class="mt-2 text-lg">Premium Quality Restaurant</p> -->
+            </div>
+            <!-- Menu Section -->
+            <div id="side" class="pl-6 overflow-hidden flex flex-col items-center">
+                <h2 class="text-2xl font-bold mb-2 text-center " id="side-title"></h2>
+                    <img src="" id="side-icon" class="w-[30%] h-auto text-center">
+                    <ul id="side-info" class="p-[-1rem]">
+
+                    </ul>
+
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="w-full relative bg-red-700">
+            <!-- Top Banner -->
+            <div class="bg-red-700 text-white py-4 text-xl flex justify-evenly items-center px-4">
+                <h2 id="date"></h2>
+                <div class="flex-1 text-center">
+                    <span class="font-bold text-[24px] mr-[150px]">Blackhawk School District</span>
+                </div>
+                <h2 class="text-white text-lg absolute right-10 text-[24px] text-bold" id="time"></h2>
+            </div>
+            
+            <!-- Image Section -->
+             <div class="slideshow">
+                <img id="slideIMG" src="" class="bg-red-700 ">
+                <video id="videoPlayer" src="" class="hidden" autoplay muted></video>
+                </div>
+            </div>
+    </div>
+
+    <script>
+
+        const slideshowElement = document.querySelector('.slideshow');
+        const timeElement = document.getElementById('time');
+        const sideTitle = document.getElementById('side-title');
+        const sideInfo = document.getElementById('side-info');
+        const scrollingContainer = document.querySelector('.scrolling-container');
+        const sideIcon = document.getElementById('side-icon');
+        let slideIMG = document.getElementById('slideIMG');
+        let videoPlayer = document.getElementById('videoPlayer');
+
+        let ticker = [];
+        {{#each info}}
+            ticker.push("{{this}}");
+        {{/each}}
+
+        let images = [];
+        {{#each images}}
+            images.push("{{this}}");
+        {{/each}}
+
+        let birthday = [];
+        {{#each birthdays}}
+            birthday.push("{{this}}"); 
+        {{/each}}
+
+        let imageIndex = 1;
+        let videoIsPlaying = false;
+       let screen = 0; // Keep this as a global variable
+
+        function sideData() { // Remove screen parameter
+            if (screen === 0) {
+                sideInfo.innerHTML = "";
+                ticker.forEach(ticker => {    
+                    sideInfo.innerHTML += `<li class="mt-4 text-xl text-center">${ticker}</li>`;
+                    sideInfo.innerHTML += `<hr class="text-white m-4">`;
+                });
+                sideTitle.innerText = "Announcements";
+                screen = 1;
+            } else if (screen === 1 && birthday.length > 0) {
+                sideInfo.innerHTML = "";
+                birthday.forEach(birthday => {    
+                    sideInfo.innerHTML += `<li class="mt-4 text-2xl text-center">${birthday}</li>`;
+                    sideInfo.innerHTML += `<hr class="text-white m-4">`;
+                });
+                sideTitle.innerText = "Happy Birthday";
+                screen = 0; 
+            }
+        }
+
+        function scrollToBottom() {
+            const sideInfo = document.getElementById('side-info');
+            const targetScroll = sideInfo.scrollHeight;
+            const duration = 15000; // Duration in milliseconds
+            const start = sideInfo.scrollTop;
+            const startTime = performance.now();
+
+            function animateScroll(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1); // Fix: Ensure progress doesn't exceed 1
+                sideInfo.scrollTop = start + (targetScroll - start) * progress;
+
+                if (progress < 1) {
+                    requestAnimationFrame(animateScroll);
+                } else {
+                    // Execute logic after scrolling completes
+                    sideData(); // Call without arguments
+
+                }
+            }
+            requestAnimationFrame(animateScroll);
+        }
+
+        //Time and Date Display
+        setInterval(() => {
+            let date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+            let amPm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12; // Convert to 12-hour format
+            minutes = minutes.toString().padStart(2, '0'); // Add leading zero
+            let time = `${hours}:${minutes} ${amPm}`;
+
+            let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            let day = days[date.getDay()];
+
+            let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            let month = months[date.getMonth()];
+
+            let dayOfMonth = date.getDate();    
+            let year = date.getFullYear();
+
+            let currentDate = `${day}, ${month} ${dayOfMonth}, ${year}`;
+
+            document.getElementById('date').innerText = currentDate;
+
+            timeElement.innerText = time;
+        }, 500);
+        
+        //Play Slideshow
+        setInterval(() => {
+            if(videoIsPlaying) {
+                return;
+            }
+            if(images[imageIndex].includes(".mp4") || images[imageIndex].includes(".mov") ) {
+                //console.log('Found Video');
+                videoPlayer.classList.remove("hidden");
+                slideIMG.classList.add("hidden");
+                videoIsPlaying = true;
+                videoPlayer.src = `/img/${images[imageIndex]}`;
+                videoPlayer.play();
+                imageIndex++;
+                if (imageIndex >= images.length) {
+                    imageIndex = 0;
+                    window.location.href = "/lunch";
+                }
+            } else {
+                videoPlayer.classList.add("hidden");
+                slideIMG.classList.remove("hidden");
+                slideIMG.src = `/img/${images[imageIndex]}`;
+                imageIndex++;
+                if (imageIndex >= images.length) {
+                    imageIndex = 0;
+                    window.location.href = "/lunch";
+                }
+            }
+        }, 5000);
+
+        videoPlayer.addEventListener('ended', () => {
+            setTimeout(() => {
+                console.log('Video ended');
+                videoIsPlaying = false;
+                //videoPlayer.classList.add("hidden");
+            }, 1500)
+        });
+
+        sideData(screen);
+        setInterval(scrollToBottom, 10000);
+        slideIMG.src = `/img/${images[0]}`;
+    </script>
+
+
+</body>
+</html>

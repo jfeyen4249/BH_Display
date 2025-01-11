@@ -1,0 +1,169 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+<style>
+    body {
+      overflow: hidden;
+      background-image: url('./bg2.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
+
+</head>
+<body class="bg-red-700/50 backdrop-blur-3xl text-gray-200 font-sans overflow-hidden">
+  <div class="max-w-6xl mx-auto p-4">
+    <div class="flex justify-center">
+      <img id="teamImage" class="max-h-[70vh] width-auto mt-12 object-cover" src="" alt="" srcset="">
+    </div>
+    <h1 class="text-4xl font-bold mt-4 text-center mb-4">{{data.title}} Calendar</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-2">
+      <!-- Card Template -->
+      <div class="p-4 rounded-lg shadow-md bg-red-800/40 backdrop-blur-3xl border border-white">
+        <div id="gamedate1" class="text-white text-3xl font-bold">J</div>
+        <div id="gamelocation1" class="mt-2 text-l"></div>
+        <div id="gametime1" class="mt-1 text-sm"></div>
+      </div>
+
+      <div class="p-4 rounded-lg shadow-md bg-red-800/40 backdrop-blur-md border border-white">
+        <div id="gamedate2" class="text-white text-3xl font-bold"></div>
+        <div id="gamelocation2" class="mt-2 text-l capitalize"></div>
+        <div id="gametime2" class="mt-1 text-sm"></div>
+      </div>
+
+      <div class="p-4 rounded-lg shadow-md bg-red-800/40 backdrop-blur-md border border-white">
+        <div id="gamedate3" class="text-white text-3xl font-bold"></div>
+        <div id="gamelocation3" class="mt-2 text-l capitalize"></div>
+        <div id="gametime3" class="mt-1 text-sm"></div>
+      </div>
+
+      <div class="p-4 rounded-lg shadow-md bg-red-800/40 backdrop-blur-md border border-white">
+        <div id="gamedate4" class="text-white text-3xl font-bold"></div>
+        <div id="gamelocation4" class="mt-2 text-l capitalize"></div>
+        <div id="gametime4" class="mt-1 text-sm"></div>
+      </div>
+
+      <div class="p-4 rounded-lg shadow-md bg-red-800/40 backdrop-blur-md border border-white">
+        <div id="gamedate5" class="text-white text-3xl font-bold"></div>
+        <div id="gamelocation5" class="mt-2 text-l capitalize"></div>
+        <div id="gametime5" class="mt-1 text-sm"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+    <script>    
+        let gamesdata = {{{data.data}}};
+        let teamImage = "{{{data.image}}}"
+        const img = new Image();
+        img.onload = function () {
+            document.getElementById("teamImage").src = teamImage;
+        };
+        img.onerror = function () {
+            document.getElementById("teamImage").src = "./logo.png";
+        };
+
+        // Attempt to load the image
+        img.src = teamImage;
+
+        console.log(teamImage);
+
+        function convertMonth(shortMonth) {
+            
+
+            switch (shortMonth) {
+                case "01":
+                    return "Jan";
+                case "02":
+                    return "Feb";
+                case "03":
+                    return "Mar";
+                case "04":
+                    return "Apr";
+                case "05":
+                    return "May";
+                case "06":
+                    return "Jun";
+                case "07":
+                    return "Jul";
+                case "08":
+                    return "Aug";
+                case "09":
+                    return "Sep";
+                case "10":
+                    return "Oct";
+                case "11":
+                    return "Nov";
+                case "12":
+                    return "Dec";
+                default:
+                    return '';
+            }
+        }
+
+        function convert24Hour(time) {
+            const [hour, minutes] = time.split(':');
+            const amOrPm = hour >= 12 ? 'PM' : 'AM';
+            const formattedHour = hour % 12 || 12;
+            return `${formattedHour}:${minutes} ${amOrPm}`;
+        }
+
+        try {
+               document.getElementById("gamedate1").innerHTML = convertMonth(gamesdata[0].date.split("/")[0]) + " " + gamesdata[0].date.split("/")[1]
+                document.getElementById("gamelocation1").innerHTML = gamesdata[0].location + ": " + gamesdata[0].team
+                document.getElementById("gametime1").innerHTML = convert24Hour(gamesdata[0].time);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+
+        try {
+             document.getElementById("gamedate2").innerHTML = convertMonth(gamesdata[1].date.split("/")[0]) + " " + gamesdata[1].date.split("/")[1]
+                document.getElementById("gamelocation2").innerHTML = gamesdata[1].location + ": " + gamesdata[1].team
+                document.getElementById("gametime2").innerHTML = convert24Hour(gamesdata[1].time);        
+
+                
+
+        } catch (error) {
+            console.error("Error:", error);
+        }
+
+        try {
+                document.getElementById("gamedate3").innerHTML = convertMonth(gamesdata[2].date.split("/")[0]) + " " + gamesdata[2].date.split("/")[1]
+                document.getElementById("gamelocation3").innerHTML = gamesdata[2].location + ": " + gamesdata[2].team
+                document.getElementById("gametime3").innerHTML = convert24Hour(gamesdata[2].time);
+        } catch (error)
+         {
+
+            console.error("Error:", error);
+        }
+
+        try {
+
+                document.getElementById("gamedate4").innerHTML = convertMonth(gamesdata[3].date.split("/")[0]) + " " + gamesdata[3].date.split("/")[1]
+                document.getElementById("gamelocation4").innerHTML = gamesdata[3].location + ": " + gamesdata[3].team
+                document.getElementById("gametime4").innerHTML = convert24Hour(gamesdata[3].time);
+        }   catch (error) {
+            console.error("Error:", error);
+        }
+
+        try {
+                document.getElementById("gamedate5").innerHTML = convertMonth(gamesdata[4].date.split("/")[0]) + " " + gamesdata[4].date.split("/")[1]
+                document.getElementById("gamelocation5").innerHTML = gamesdata[4].location + ": " + gamesdata[4].team
+                document.getElementById("gametime5").innerHTML = convert24Hour(gamesdata[4].time);
+
+        } catch (error) {
+            console.error("Error:", error);
+        }
+       setTimeout(() => {
+            window.location.href = "{{{data.nextpage}}}"
+        }, 15000);
+    </script>
+</body>
+</html>

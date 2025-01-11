@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunch</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      overflow: hidden;
+      background-image: url('./bg5.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body class="text-white font-sans">
+  <div class="flex flex-col items-center justify-center min-h-screen p-6 mt-[-8vh]">
+    <!-- Welcome Section -->
+    <div class="text-center mb-12">
+      <p class="mt-4 text-lg max-w-lg">
+      </p>
+    </div>
+
+    <!-- Main Content --> 
+    <div class="flex flex-col md:flex-row items-center bg-red-900/40 backdrop-blur-2xl rounded-lg shadow-lg p-8 w-[85vw] space-y-6 md:space-y-0 md:space-x-8">
+ 
+       <!-- Time Section -->
+      <div class="text-center">
+        <img class="w-[250px] h-auto mx-auto mt-[-50px]" src="./logo.png" alt="Logo">
+        <h2 id="day" class="text-3xl font-bold"</h2>
+        <h2 id="time" class="text-3xl font-bold"></h2>
+      </div>
+
+      <!-- Today's Lunch Section -->
+       <div class="flex-1">
+        <div class="rounded-lg p-6 text-center h-[40vh]">
+        <h2 class="text-2xl font-bold mb-4">Lunch Menu</h2>
+          <div class="grid grid-cols-3 gap-2 mt-8 text-center">
+          <div class="rounded-lg p-4 border border-white">
+            <p id="1-date" class="text-xl">&nbsp;</p>
+            <hr class="m-4">
+            <p id="1-line1" class="text-lg">&nbsp;</p>
+            <p id="1-line2" class="text-lg">&nbsp;</p>
+            <p id="1-line3" class="text-lg">&nbsp;</p>
+            <p id="1-line4" class="text-lg">&nbsp;</p>
+            <p id="1-line5" class="text-lg">&nbsp;</p>
+            <p id="1-line6" class="text-lg">&nbsp;</p>
+
+          </div>
+
+          <div class="rounded-lg p-4 border border-white">
+            <p id="2-date" class="text-xl">&nbsp;</p>
+            <hr class="m-4">
+            <p id="2-line1" class="text-lg">&nbsp;</p>
+            <p id="2-line2" class="text-lg">&nbsp;</p>
+            <p id="2-line3" class="text-lg">&nbsp;</p>
+            <p id="2-line4" class="text-lg">&nbsp;</p>
+            <p id="2-line5" class="text-lg">&nbsp;</p>
+            <p id="2-line6" class="text-lg">&nbsp;</p>
+            
+          </div>
+
+          <div class="rounded-lg p-4 border border-white">
+            <p id="3-date" class="text-xl">&nbsp;</p>
+            <hr class="m-4">
+            <p id="3-line1" class="text-lg">&nbsp;</p>
+            <p id="3-line2" class="text-lg">&nbsp;</p>
+            <p id="3-line3" class="text-lg">&nbsp;</p>
+            <p id="3-line4" class="text-lg">&nbsp;</p>
+            <p id="3-line5" class="text-lg">&nbsp;</p>
+            <p id="3-line6" class="text-lg">&nbsp;</p>
+          </div>
+        </div>
+        </div>
+
+        <!-- Next 3 days Section -->
+        
+
+        <br>
+
+        <div class="grid grid-cols-3 gap-3 mt-[-25px] p-8 text-center">
+         
+          <div class="rounded-lg p-4 border border-white">
+            <p id="4-date" class="text-xl">&nbsp;</p>
+            <hr class="m-4">
+            <p id="4-line1" class="text-lg">&nbsp;</p>
+            <p id="4-line2" class="text-lg">&nbsp;</p>
+            <p id="4-line3" class="text-lg">&nbsp;</p>
+            <p id="4-line4" class="text-lg">&nbsp;</p>
+            <p id="4-line5" class="text-lg">&nbsp;</p>
+            <p id="4-line6" class="text-lg">&nbsp;</p>
+          </div>
+
+          <div class="rounded-lg p-4 border border-white">
+            <p id="5-date" class="text-xl">&nbsp;</p>
+            <hr class="m-4">
+            <p id="5-line1" class="text-lg">&nbsp;</p>
+            <p id="5-line2" class="text-lg">&nbsp;</p>
+            <p id="5-line3" class="text-lg">&nbsp;</p>
+            <p id="5-line4" class="text-lg">&nbsp;</p>
+            <p id="5-line5" class="text-lg">&nbsp;</p>
+            <p id="5-line6" class="text-lg">&nbsp;</p>
+          </div>
+
+          <div class="rounded-lg p-4 border border-white">   
+            <p id="6-date" class="text-xl">&nbsp;</p>
+            <hr class="m-4">
+            <p id="6-line1" class="text-lg">&nbsp;</p>
+            <p id="6-line2" class="text-lg">&nbsp;</p>  
+            <p id="6-line3" class="text-lg">&nbsp;</p>
+            <p id="6-line4" class="text-lg">&nbsp;</p>
+            <p id="6-line5" class="text-lg">&nbsp;</p>
+            <p id="6-line6" class="text-lg">&nbsp;</p>  
+          </div>
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script> 
+    function convertMonth(shortMonth) {
+            
+
+            switch (shortMonth) {
+                case "01":
+                    return "Jan";
+                case "02":
+                    return "Feb";
+                case "03":
+                    return "Mar";
+                case "04":
+                    return "Apr";
+                case "05":
+                    return "May";
+                case "06":
+                    return "Jun";
+                case "07":
+                    return "Jul";
+                case "08":
+                    return "Aug";
+                case "09":
+                    return "Sep";
+                case "10":
+                    return "Oct";
+                case "11":
+                    return "Nov";
+                case "12":
+                    return "Dec";
+                default:
+                    return '';
+            }
+        }
+
+    const lunchData = JSON.parse('{{{lunchData}}}');
+
+    try {
+      document.getElementById("1-date").innerHTML = convertMonth(lunchData[0].date.split("/")[0]) + " " + lunchData[0].date.split("/")[1] + ", " + lunchData[1].date.split("/")[2];
+      document.getElementById("1-line1").innerHTML = lunchData[0].line1;
+      document.getElementById("1-line2").innerHTML = lunchData[0].line2;
+      document.getElementById("1-line3").innerHTML = lunchData[0].line3;
+      document.getElementById("1-line4").innerHTML = lunchData[0].line4;
+      document.getElementById("1-line5").innerHTML = lunchData[0].line5;
+      document.getElementById("1-line6").innerHTML = lunchData[0].line6;
+    } catch (error) {
+      
+    }
+
+    try {
+      document.getElementById("2-date").innerHTML = convertMonth(lunchData[1].date.split("/")[0]) + " " + lunchData[1].date.split("/")[1] + ", " + lunchData[2].date.split("/")[2];
+      document.getElementById("2-line1").innerHTML = lunchData[1].line1;
+      document.getElementById("2-line2").innerHTML = lunchData[1].line2;
+      document.getElementById("2-line3").innerHTML = lunchData[1].line3;
+      document.getElementById("2-line4").innerHTML = lunchData[1].line4;
+      document.getElementById("2-line5").innerHTML = lunchData[1].line5;
+      document.getElementById("2-line6").innerHTML = lunchData[1].line6;
+    } catch (error) {
+      
+    }
+
+    try {
+      document.getElementById("3-date").innerHTML = convertMonth(lunchData[2].date.split("/")[0]) + " " + lunchData[2].date.split("/")[1] + ", " + lunchData[3].date.split("/")[2];
+      document.getElementById("3-line1").innerHTML = lunchData[2].line1;
+      document.getElementById("3-line2").innerHTML = lunchData[2].line2;
+      document.getElementById("3-line3").innerHTML = lunchData[2].line3;
+      document.getElementById("3-line4").innerHTML = lunchData[2].line4;
+      document.getElementById("3-line5").innerHTML = lunchData[2].line5;
+      document.getElementById("3-line6").innerHTML = lunchData[2].line6;
+    } catch (error) {
+      
+    }
+
+        try {
+      document.getElementById("4-date").innerHTML = convertMonth(lunchData[3].date.split("/")[0]) + " " + lunchData[3].date.split("/")[1] + ", " + lunchData[3].date.split("/")[2];
+      document.getElementById("4-line1").innerHTML = lunchData[3].line1;
+      document.getElementById("4-line2").innerHTML = lunchData[3].line2;
+      document.getElementById("4-line3").innerHTML = lunchData[3].line3;
+      document.getElementById("4-line4").innerHTML = lunchData[3].line4;
+      document.getElementById("4-line5").innerHTML = lunchData[3].line5;
+      document.getElementById("4-line6").innerHTML = lunchData[3].line6;
+    } catch (error) {
+      
+    }
+
+    try {
+      document.getElementById("5-date").innerHTML = convertMonth(lunchData[4].date.split("/")[0]) + " " + lunchData[4].date.split("/")[1] + ", " + lunchData[4].date.split("/")[2];
+      document.getElementById("5-line1").innerHTML = lunchData[4].line1;
+      document.getElementById("5-line2").innerHTML = lunchData[4].line2;
+      document.getElementById("5-line3").innerHTML = lunchData[4].line3;
+      document.getElementById("5-line4").innerHTML = lunchData[4].line4;
+      document.getElementById("5-line5").innerHTML = lunchData[4].line5;
+      document.getElementById("5-line6").innerHTML = lunchData[4].line6;
+    } catch (error) {
+      
+    }
+
+    try {
+      document.getElementById("6-date").innerHTML = convertMonth(lunchData[5].date.split("/")[0]) + " " + lunchData[5].date.split("/")[1] + ", " + lunchData[5].date.split("/")[2];
+      document.getElementById("6-line1").innerHTML = lunchData[5].line1;
+      document.getElementById("6-line2").innerHTML = lunchData[5].line2;
+      document.getElementById("6-line3").innerHTML = lunchData[5].line3;
+      document.getElementById("6-line4").innerHTML = lunchData[5].line4;
+      document.getElementById("6-line5").innerHTML = lunchData[5].line5;
+      document.getElementById("6-line6").innerHTML = lunchData[5].line6;
+    } catch (error) {
+      
+    }
+
+    {{!-- setTimeout(() => {
+      window.location.href = "/bb-girls";
+    }, 15000); --}}
+
+    setInterval(() => {
+            let date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+            let amPm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12; // Convert to 12-hour format
+            minutes = minutes.toString().padStart(2, '0'); // Add leading zero
+            let time = `${hours}:${minutes} ${amPm}`;
+
+            let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            let day = days[date.getDay()];
+
+            let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            let month = months[date.getMonth()];
+
+            let dayOfMonth = date.getDate();    
+            let year = date.getFullYear();
+
+            let currentDate = `${day}, ${month} ${dayOfMonth}, ${year}`;
+
+            document.getElementById('day').innerHTML = `<h2 class="text-3xl font-bold">${day} <br> ${month} ${dayOfMonth}, ${year}</h2>`
+            
+            document.getElementById('time').innerText = time;
+
+
+            
+        }, 500);
+
+     // console.log(lunchData);
+  </script>
+</body>
+</html>
